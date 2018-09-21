@@ -1,7 +1,0 @@
-{
-  "name": "Looptune",
-  "integrations": {
-    "cordova": {}
-  },
-  "type": "ionic-angular"
-}
