@@ -2,4 +2,8 @@ page-tutorial {
     .scroll-content {
         background-color: map-get($colors, light);
     }
+    ion-card {
+        max-width: 30em !important;
+        margin: 1em auto !important;
+     }
 }

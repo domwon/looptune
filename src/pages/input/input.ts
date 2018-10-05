@@ -94,18 +94,23 @@ export class InputPage {
     } else {
       this.deadTime = Math.round(this.inputDeadTime)
     }
+
+    console.log('Open Loop Parameters\n\nProcess Gain: ' + this.processGain +
+    '\nOL Time Constant ' + this.OLTimeConstant +
+    '\nDead Time ' + this.deadTime)
   }
 
   miscellaneousCalcs() {
 
     // calc unscaled process gain
-    if (this.processGain <= 0) {
+    if (this.processGain > 0) {
       this.unscaledKc = this.scaledKc * (this.maxCO - this.minCO) /
         (this.maxPV - this.minPV)
     } else {
       this.unscaledKc = -1 * this.scaledKc * (this.maxCO - this.minCO) /
         (this.maxPV - this.minPV)
     }
+    console.log(this.unscaledKc);
 
     // calc final time
     if (this.unit == 'sec') {
@@ -172,12 +177,12 @@ export class InputPage {
   calcGainForTuning(cl) {
     if (this.unit == 'sec') {
       return Math.abs(this.adjustedOLTimeConstant /
-        (this.processGain * (cl + this.adjustedDeadTime) *
-          ((this.maxPV - this.minPV) / (this.maxCO - this.minCO))))
+        (this.processGain * (cl + this.adjustedDeadTime)) *
+          ((this.maxPV - this.minPV) / (this.maxCO - this.minCO)))
     } else {
       return Math.abs(this.adjustedOLTimeConstant /
-        (this.processGain * (cl * 60 + this.adjustedDeadTime) *
-          ((this.maxPV - this.minPV) / (this.maxCO - this.minCO))))
+        (this.processGain * (cl * 60 + this.adjustedDeadTime)) *
+          ((this.maxPV - this.minPV) / (this.maxCO - this.minCO)))
     }
   }
 
